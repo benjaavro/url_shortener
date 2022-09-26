@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_shortener/core/constants/colors.dart';
 
-/// Use this button to advance or come back in forms dialogs
+///Use this button when you need a filled background icon button
 ///
 /// 1. [function] --> It is the method it executes when onPressed
 /// 2. [icon] --> Icon displayed on button
@@ -21,6 +21,7 @@ class SimpleIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       splashColor: BrandColors.babyBlue,
+      splashRadius: 20,
       onPressed: function,
       icon: Icon(
         icon,

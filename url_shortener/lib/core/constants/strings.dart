@@ -1,6 +1,8 @@
 class AppStrings {
   AppStrings._();
 
-  // COMMON STRINGS
-  static const nextButton = "Siguiente";
+  // APP'S STATIC STRINGS
+  static const aliasLabel = "Alias";
+  static const originalLabel = "Original";
+  static const shortenedLabel = "Shortened";
 }

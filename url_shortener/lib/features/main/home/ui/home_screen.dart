@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_shortener/core/common_widgets/buttons/filled_icon_button.dart';
-import 'package:url_shortener/core/common_widgets/buttons/simple_icon_button.dart';
-import 'package:url_shortener/core/common_widgets/textfields/full_width_text_field.dart';
-import 'package:url_shortener/core/common_widgets/texts/regular_text.dart';
-import 'package:url_shortener/core/common_widgets/texts/subtitle_text.dart';
+import 'package:url_shortener/core/common_widgets/cards/url_details_card/url_details_card.dart';
 import 'package:url_shortener/core/common_widgets/texts/title_text.dart';
 import 'package:url_shortener/core/constants/colors.dart';
 
@@ -25,48 +21,14 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const TitleText(
+        children: const [
+          TitleText(
             text: "URL Shortener App",
           ),
-          const SubtitleText(
-            text: "This is a bold grey subtitle",
-            color: BrandColors.lightGrey,
-          ),
-          const SubtitleText(
-            text: "This is a bold white subtitle",
-            color: BrandColors.white,
-          ),
-          const RegularText(
-            text: "This is dummy data text with regular format",
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 10,
-                child: SimpleIconButton(
-                  function: () {},
-                  icon: Icons.copy,
-                  iconColor: BrandColors.white,
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 0),
-                  child: FilledIconButton(
-                    function: () {},
-                    icon: Icons.send_rounded,
-                    backgroundColor: BrandColors.babyBlue,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          FullWidthTextField(
-            function: (value) {
-
-            },
+          URLDetailsCard(
+            alias: "654987",
+            original: "https://www.youtube.com/watch?v=9240juCrcyo&list=WL&index=11&t=4s",
+            shortened: "https://url-shortener-nu.herokuapp.com",
           ),
         ],
       ),

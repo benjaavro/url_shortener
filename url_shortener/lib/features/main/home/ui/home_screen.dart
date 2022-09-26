@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_shortener/core/common_widgets/buttons/filled_icon_button.dart';
-import 'package:url_shortener/core/common_widgets/buttons/icon_button.dart';
+import 'package:url_shortener/core/common_widgets/buttons/simple_icon_button.dart';
+import 'package:url_shortener/core/common_widgets/textfields/full_width_text_field.dart';
 import 'package:url_shortener/core/common_widgets/texts/regular_text.dart';
 import 'package:url_shortener/core/common_widgets/texts/subtitle_text.dart';
 import 'package:url_shortener/core/common_widgets/texts/title_text.dart';
@@ -61,7 +62,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ],
-          )
+          ),
+          FullWidthTextField(
+            function: (value) {
+
+            },
+          ),
         ],
       ),
     );

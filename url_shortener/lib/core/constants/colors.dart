@@ -39,7 +39,7 @@ class BrandColors {
     500: Color(_black),
   });
 
-  static const _babyBlue = 0xFF8AB4F89;
+  static const _babyBlue = 0xFF8AB4F8;
 
   static const MaterialColor babyBlue = MaterialColor(_babyBlue, <int, Color>{
     100: Color(0x668AB4F8),

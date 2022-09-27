@@ -41,24 +41,32 @@ class _URLDetailsCardState extends State<URLDetailsCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // SHORTENED URL ALIAS
                   URLDetailText(
                     labelText: AppStrings.aliasLabel,
                     detailText: widget.alias,
                   ),
+
+                  // ORIGINAL URL
                   URLDetailText(
                     labelText: AppStrings.originalLabel,
                     detailText: widget.original,
                   ),
+
+                  // SHORTENED URL
                   URLDetailText(
                     labelText: AppStrings.shortenedLabel,
                     detailText: widget.shortened,
                   ),
                 ],
               ),
+
+              // COPY TO CLIPBOARD BUTTON
               SimpleIconButton(
                 function: () {
                   // TODO Add copy to clipboard functionality

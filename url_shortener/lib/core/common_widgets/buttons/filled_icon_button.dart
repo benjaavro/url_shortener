@@ -33,6 +33,7 @@ class FilledIconButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(5), // <-- Radius
             ),
             elevation: 10,
+            padding: const EdgeInsets.all(0)
           ),
           child: Center(
             child: Icon(

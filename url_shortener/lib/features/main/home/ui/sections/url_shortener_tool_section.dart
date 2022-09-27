@@ -6,7 +6,8 @@ import 'package:url_shortener/core/common_widgets/texts/subtitle_text.dart';
 import 'package:url_shortener/core/constants/colors.dart';
 import 'package:url_shortener/core/constants/strings.dart';
 import 'package:url_shortener/core/providers/features/main/home/url_form_provider.dart';
-import 'package:url_shortener/features/main/home/logic/url_input_deletion.dart';
+import 'package:url_shortener/core/providers/features/main/home/urls_list_provider.dart';
+import 'package:url_shortener/features/main/home/logic/add_shortened_url_to_list.dart';
 import 'package:url_shortener/features/main/home/logic/url_shorten_request.dart';
 
 class URLShortenerToolSection extends StatefulWidget {
@@ -20,11 +21,13 @@ class _URLShortenerToolSectionState extends State<URLShortenerToolSection> {
   // Initializing this TextEditingController allows us to delete text field data from outer methods.
   final TextEditingController textEditingController = TextEditingController();
   URLFormProvider? urlFormProvider;
+  URLsListProvider? urlsListProvider;
 
   @override
   void initState() {
     // Initialize URL Form data Provider for usage on current widget
     urlFormProvider = Provider.of<URLFormProvider>(context, listen: false);
+    urlsListProvider = Provider.of<URLsListProvider>(context, listen: false);
 
     super.initState();
   }
@@ -78,13 +81,16 @@ class _URLShortenerToolSectionState extends State<URLShortenerToolSection> {
                       backgroundColor: BrandColors.babyBlue,
                       function: () async {
                         // 1. URL shorten request
-                        await urlShortenRequest(urlFormProvider!.url);
+                        Map result = await urlShortenRequest(urlFormProvider!.url);
 
-                        // 2. Clear url stored on Provider
-                        urlInputDeletion(urlFormProvider!);
+                        // 2. Clear url stored on URL Form Provider
+                        urlFormProvider!.clearUrlInput();
 
                         // 3. Clear Text field
                         textEditingController.clear();
+
+                        // 4. Add URL data to URLs List on Provider
+                        addApiResultoToList(urlsListProvider!, result);
                       },
                     ),
                   ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_shortener/core/common_widgets/buttons/simple_icon_button.dart';
 import 'package:url_shortener/core/common_widgets/texts/subtitle_text.dart';
 import 'package:url_shortener/core/common_widgets/texts/title_text.dart';
 import 'package:url_shortener/core/constants/colors.dart';
 import 'package:url_shortener/core/constants/strings.dart';
+import 'package:url_shortener/core/providers/features/main/home/urls_list_provider.dart';
 
 class HeaderSection extends StatefulWidget {
   const HeaderSection({Key? key}) : super(key: key);
@@ -13,6 +15,16 @@ class HeaderSection extends StatefulWidget {
 }
 
 class _HeaderSectionState extends State<HeaderSection> {
+  URLsListProvider? urlsListProvider;
+
+  @override
+  void initState() {
+    // Initialize URL Form data Provider for usage on current widget
+    urlsListProvider = Provider.of<URLsListProvider>(context, listen: false);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -45,7 +57,8 @@ class _HeaderSectionState extends State<HeaderSection> {
                 // CLEAR URLS LIST ICON BUTTON
                 SimpleIconButton(
                   function: () {
-                    // TODO Create List Deletion Feature
+                    // 1. List Delete on click
+                    urlsListProvider!.clearUrlsList();
                   },
                   icon: Icons.delete,
                   iconColor: BrandColors.lightGrey,

@@ -2,7 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:url_shortener/core/models/url_model.dart';
 
 class URLsListProvider with ChangeNotifier {
-  List<URL> _urlsList = [];
+  final List<URL> _urlsList = [];
 
   List<URL> get urlsList => _urlsList;
+
+  void addUrlDataToList(URL newUrlData) {
+    _urlsList.add(newUrlData);
+    notifyListeners();
+  }
+
+  void clearUrlsList() {
+    _urlsList.clear();
+    notifyListeners();
+  }
 }

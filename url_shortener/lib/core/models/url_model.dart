@@ -11,7 +11,6 @@ class URL {
       }
     }
   */
-
   final String alias;
   final String originalURL;
   final String shortenedURL;
@@ -22,11 +21,8 @@ class URL {
     this.shortenedURL,
   );
 
-  factory URL.fromJson(Map<String, dynamic> data) {
-    return jsonDecode(data.toString());
-  }
-
-  String toJsonString(URL url) {
-    return jsonEncode(url);
-  }
+  URL.fromJson(Map json)
+      : alias = json['alias'],
+        originalURL = json['_links']['self'],
+        shortenedURL = json['_links']['short'];
 }

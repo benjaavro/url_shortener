@@ -6,7 +6,7 @@ import 'package:url_shortener/core/services/api/url_shortening_api_service.dart'
 
 void main() {
   group('shortenUrlAPI', () {
-    test('should return shorten URL json result when http response is successful', () async {
+    test('should return shortened URL json result when http response is successful', () async {
       // Initialize request data
       const String requestRoute = "api/alias";
       const Map<String, dynamic> requestBody = {"url": "https://www.youtube.com/watch?v=9240juCrcyo&list=WL&index=11&t=4s"};

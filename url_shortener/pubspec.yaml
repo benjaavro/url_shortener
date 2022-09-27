@@ -30,6 +30,8 @@ dependencies:
   google_fonts: ^3.0.1
   cupertino_icons: ^1.0.2
 
+  # Testing thingies
+  mockito: ^5.3.2
 
 
 dev_dependencies:

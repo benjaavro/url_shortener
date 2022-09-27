@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_shortener/core/common_widgets/buttons/filled_icon_button.dart';
 import 'package:url_shortener/core/common_widgets/text_fields/full_width_text_field.dart';
 import 'package:url_shortener/core/common_widgets/texts/subtitle_text.dart';
 import 'package:url_shortener/core/constants/colors.dart';
 import 'package:url_shortener/core/constants/strings.dart';
+import 'package:url_shortener/core/providers/features/main/home/url_form_provider.dart';
+import 'package:url_shortener/features/main/home/logic/url_input_deletion.dart';
+import 'package:url_shortener/features/main/home/logic/url_shorten_request.dart';
 
 class URLShortenerToolSection extends StatefulWidget {
   const URLShortenerToolSection({Key? key}) : super(key: key);
@@ -13,6 +17,18 @@ class URLShortenerToolSection extends StatefulWidget {
 }
 
 class _URLShortenerToolSectionState extends State<URLShortenerToolSection> {
+  // Initializing this TextEditingController allows us to delete text field data from outer methods.
+  final TextEditingController textEditingController = TextEditingController();
+  URLFormProvider? urlFormProvider;
+
+  @override
+  void initState() {
+    // Initialize URL Form data Provider for usage on current widget
+    urlFormProvider = Provider.of<URLFormProvider>(context, listen: false);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -33,8 +49,7 @@ class _URLShortenerToolSectionState extends State<URLShortenerToolSection> {
 
           // URL SHORTEN TOOLS ROW
           Padding(
-            padding: const EdgeInsets.symmetric(
-                vertical: 10.0, horizontal: 15.0),
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
             child: Row(
               children: [
                 // URL REQUEST TEXT FIELD
@@ -44,8 +59,10 @@ class _URLShortenerToolSectionState extends State<URLShortenerToolSection> {
                     margin: const EdgeInsets.only(right: 10),
                     child: FullWidthTextField(
                       hintText: AppStrings.urlTextFieldHintSubtitle,
+                      fieldController: textEditingController,
                       function: (value) {
-                        // TODO Create URL store feature
+                        // 1. Store text field input on Provider to access data from other functions.
+                        urlFormProvider!.storeUrlInput(value);
                       },
                     ),
                   ),
@@ -59,8 +76,15 @@ class _URLShortenerToolSectionState extends State<URLShortenerToolSection> {
                     child: FilledIconButton(
                       icon: Icons.send,
                       backgroundColor: BrandColors.babyBlue,
-                      function: () {
-                        // TODO Create URL shorten request feature
+                      function: () async {
+                        // 1. URL shorten request
+                        await urlShortenRequest(urlFormProvider!.url);
+
+                        // 2. Clear url stored on Provider
+                        urlInputDeletion(urlFormProvider!);
+
+                        // 3. Clear Text field
+                        textEditingController.clear();
                       },
                     ),
                   ),

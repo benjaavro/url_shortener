@@ -22,17 +22,18 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<URLsListProvider>(create: (_) => URLsListProvider()),
         ChangeNotifierProvider<URLFormProvider>(create: (_) => URLFormProvider()),
       ],
-      child: const MaterialApp(
-        title: AppStrings.appTitle,
-        debugShowCheckedModeBanner: false,
-        // Call to generateRoute method where routes are stored
-        onGenerateRoute: router.generateRoute,
+      builder: (context, child) {
+        return const MaterialApp(
+          title: AppStrings.appTitle,
+          debugShowCheckedModeBanner: false,
+          // Call to generateRoute method where routes are stored
+          onGenerateRoute: router.generateRoute,
 
-        // For development purposes you can change initial route to be your current working screen
-        // Remember to set back to "homeRoute" when finished.
-        // TODO Set Initial Route to: homeRoute
-        initialRoute: homeRoute,
-      ),
+          // For development purposes you can change initial route to be your current working screen
+          // Remember to set back to "homeRoute" when finished.
+          initialRoute: homeRoute,
+        );
+      },
     );
   }
 }

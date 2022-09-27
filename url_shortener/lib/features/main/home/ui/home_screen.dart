@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // URLs SHORTENER TOOL
           Expanded(
-            flex: 3,
+            flex: 4,
             child: URLShortenerToolSection(),
           ),
         ],

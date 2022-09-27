@@ -37,7 +37,8 @@ class _URLShortenerToolSectionState extends State<URLShortenerToolSection> {
     return SizedBox(
       width: double.infinity,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
         children: [
           // URL SHORTEN HINT SUBTITLE
           Row(
@@ -55,9 +56,12 @@ class _URLShortenerToolSectionState extends State<URLShortenerToolSection> {
                             color: BrandColors.lightGrey,
                           ),
                         )
-                      : const SubtitleText(
-                          text: AppStrings.shortenHintSubtitle,
-                          color: BrandColors.white,
+                      : const Padding(
+                          padding: EdgeInsets.only(top: 18.0),
+                          child: SubtitleText(
+                            text: AppStrings.shortenHintSubtitle,
+                            color: BrandColors.white,
+                          ),
                         );
                 },
               ),
@@ -89,30 +93,27 @@ class _URLShortenerToolSectionState extends State<URLShortenerToolSection> {
                 // URL REQUEST BUTTON
                 Expanded(
                   flex: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: FilledIconButton(
-                      icon: Icons.send,
-                      backgroundColor: BrandColors.babyBlue,
-                      function: () async {
-                        // 1. URL shortening request with data on text field.
-                        await shortenUrlFromTextField(
-                          urlsListProvider!,
-                          urlFormProvider!,
-                          textEditingController,
-                        );
-                      },
+                  child: SizedBox(
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: FilledIconButton(
+                        icon: Icons.send,
+                        backgroundColor: BrandColors.babyBlue,
+                        function: () async {
+                          // 1. URL shortening request with data on text field.
+                          await shortenUrlFromTextField(
+                            urlsListProvider!,
+                            urlFormProvider!,
+                            textEditingController,
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
           ),
-
-          // UI HELPER FOR iOS MENU BUTTON
-          const SizedBox(
-            height: 25,
-          )
         ],
       ),
     );

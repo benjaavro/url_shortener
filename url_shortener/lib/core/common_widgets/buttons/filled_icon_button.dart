@@ -19,28 +19,26 @@ class FilledIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: SizedBox(
-        child: ElevatedButton(
-          onPressed: () {
-            function();
-          },
-          style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.black87,
-            backgroundColor: backgroundColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5), // <-- Radius
-            ),
-            elevation: 10,
-            padding: const EdgeInsets.all(0)
+    return SizedBox(
+      height: 50,
+      child: ElevatedButton(
+        onPressed: () {
+          function();
+        },
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.black87,
+          backgroundColor: backgroundColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5), // <-- Radius
           ),
-          child: Center(
-            child: Icon(
-              icon,
-              color: BrandColors.black,
-              size: 30,
-            ),
+          elevation: 10,
+          padding: const EdgeInsets.all(0)
+        ),
+        child: Center(
+          child: Icon(
+            icon,
+            color: BrandColors.black,
+            size: 30,
           ),
         ),
       ),

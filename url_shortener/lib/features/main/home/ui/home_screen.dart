@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:url_shortener/core/constants/colors.dart';
 import 'package:url_shortener/features/main/home/ui/sections/header_section.dart';
 import 'package:url_shortener/features/main/home/ui/sections/url_shortener_tool_section.dart';
-
 import 'sections/urls_list_section.dart';
 
 class HomeScreen extends StatefulWidget {

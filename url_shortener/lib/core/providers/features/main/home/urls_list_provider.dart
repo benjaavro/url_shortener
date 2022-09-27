@@ -7,7 +7,7 @@ class URLsListProvider with ChangeNotifier {
   List<URL> get urlsList => _urlsList;
 
   void addUrlDataToList(URL newUrlData) {
-    _urlsList.add(newUrlData);
+    _urlsList.insert(0, newUrlData);
     notifyListeners();
   }
 

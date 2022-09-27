@@ -20,8 +20,8 @@ class URLShortenerToolSection extends StatefulWidget {
 class _URLShortenerToolSectionState extends State<URLShortenerToolSection> {
   // Initializing this TextEditingController allows us to delete text field data from outer methods.
   final TextEditingController textEditingController = TextEditingController();
-  URLFormProvider? urlFormProvider;
   URLsListProvider? urlsListProvider;
+  URLFormProvider? urlFormProvider;
 
   @override
   void initState() {

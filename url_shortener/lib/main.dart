@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: router.generateRoute,
 
         // For development purposes you can change initial route to be your current working screen
-        // Remember to set back to "HomeRoute" when finished.
-        // TODO Set Initial Route to: HomeRoute
+        // Remember to set back to "homeRoute" when finished.
+        // TODO Set Initial Route to: homeRoute
         initialRoute: homeRoute,
       ),
     );

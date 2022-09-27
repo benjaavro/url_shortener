@@ -7,14 +7,14 @@ import 'package:url_shortener/core/constants/colors.dart';
 import 'package:url_shortener/core/constants/strings.dart';
 import 'package:url_shortener/core/providers/features/main/home/url_form_provider.dart';
 import 'package:url_shortener/core/providers/features/main/home/urls_list_provider.dart';
-import 'package:url_shortener/features/main/home/logic/add_shortened_url_to_list.dart';
-import 'package:url_shortener/features/main/home/logic/url_shorten_request.dart';
+import 'package:url_shortener/features/main/home/logic/shorten_url_from_text_field.dart';
 
 class URLShortenerToolSection extends StatefulWidget {
   const URLShortenerToolSection({Key? key}) : super(key: key);
 
   @override
-  State<URLShortenerToolSection> createState() => _URLShortenerToolSectionState();
+  State<URLShortenerToolSection> createState() =>
+      _URLShortenerToolSectionState();
 }
 
 class _URLShortenerToolSectionState extends State<URLShortenerToolSection> {
@@ -42,17 +42,32 @@ class _URLShortenerToolSectionState extends State<URLShortenerToolSection> {
           // URL SHORTEN HINT SUBTITLE
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              SubtitleText(
-                text: AppStrings.shortenHintSubtitle,
-                color: BrandColors.white,
+            children: [
+              Consumer<URLFormProvider>(
+                builder: (context, providerData, _) {
+                  bool loading = providerData.loading;
+
+                  // Display Loading Indicator if API Request is executing or
+                  // hint text if nothing is happening yet.
+                  return loading
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                            color: BrandColors.lightGrey,
+                          ),
+                        )
+                      : const SubtitleText(
+                          text: AppStrings.shortenHintSubtitle,
+                          color: BrandColors.white,
+                        );
+                },
               ),
             ],
           ),
 
           // URL SHORTEN TOOLS ROW
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
             child: Row(
               children: [
                 // URL REQUEST TEXT FIELD
@@ -80,17 +95,12 @@ class _URLShortenerToolSectionState extends State<URLShortenerToolSection> {
                       icon: Icons.send,
                       backgroundColor: BrandColors.babyBlue,
                       function: () async {
-                        // 1. URL shorten request
-                        Map result = await urlShortenRequest(urlFormProvider!.url);
-
-                        // 2. Clear url stored on URL Form Provider
-                        urlFormProvider!.clearUrlInput();
-
-                        // 3. Clear Text field
-                        textEditingController.clear();
-
-                        // 4. Add URL data to URLs List on Provider
-                        addApiResultoToList(urlsListProvider!, result);
+                        // 1. URL shortening request with data on text field.
+                        await shortenUrlFromTextField(
+                          urlsListProvider!,
+                          urlFormProvider!,
+                          textEditingController,
+                        );
                       },
                     ),
                   ),

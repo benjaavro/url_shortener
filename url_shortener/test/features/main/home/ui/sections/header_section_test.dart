@@ -10,6 +10,7 @@ import 'package:url_shortener/main.dart';
 void main() {
   group("Header Section", () {
     testWidgets('Header Section has list title', (WidgetTester tester) async {
+      // Initialize required Widget tree
       await tester.pumpWidget(
         MultiProvider(
           providers: [
@@ -29,8 +30,8 @@ void main() {
       expect(hintFinder, findsOneWidget);
     });
 
-    testWidgets('URL Shortener Tool Section has text field and button to request shortening', (WidgetTester tester) async {
-      // Provide the childWidget to the Container.
+    testWidgets('Header Section has list deletion button', (WidgetTester tester) async {
+      // Initialize required Widget tree
       await tester.pumpWidget(
         MultiProvider(
           providers: [
@@ -44,10 +45,10 @@ void main() {
       );
 
       // Create the Finders.
-      final textFieldFinder = find.byType(SimpleIconButton);
+      final iconButtonFinder = find.byType(SimpleIconButton);
 
       // Search for the childWidget in the tree and verify it exists.
-      expect(textFieldFinder, findsOneWidget);
+      expect(iconButtonFinder, findsOneWidget);
     });
   });
 }

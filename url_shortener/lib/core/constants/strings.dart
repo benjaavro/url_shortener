@@ -9,4 +9,6 @@ class AppStrings {
   static const aliasLabel = "Alias";
   static const originalLabel = "Original";
   static const shortenedLabel = "Shortened";
+  static const goBackLabel = "Go back";
+  static const copiedToClipboardMessage = "Copied shortened URL to clipboard.";
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:url_shortener/core/common_widgets/buttons/simple_icon_button.dart';
 import 'package:url_shortener/core/common_widgets/cards/url_details_card/url_detail_text.dart';
+import 'package:url_shortener/core/common_widgets/dialogs/copied_to_clipboard_dialog.dart';
 import 'package:url_shortener/core/constants/colors.dart';
 import 'package:url_shortener/core/constants/strings.dart';
 
@@ -68,8 +70,12 @@ class _URLDetailsCardState extends State<URLDetailsCard> {
 
               // COPY TO CLIPBOARD BUTTON
               SimpleIconButton(
-                function: () {
-                  // TODO Add copy to clipboard functionality
+                function: () async {
+                  // Copy Card Shortened Value to Clipboard and display alert when done
+                  await Clipboard.setData(
+                    ClipboardData(text: widget.shortened),
+                  ).then((_) => copiedToClipboardDialog(context));
+
                 },
                 icon: Icons.copy,
                 iconColor: BrandColors.white,

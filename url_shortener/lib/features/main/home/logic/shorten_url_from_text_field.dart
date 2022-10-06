@@ -3,6 +3,7 @@ import 'package:url_shortener/core/models/url_model.dart';
 import 'package:url_shortener/core/providers/features/main/home/url_form_provider.dart';
 import 'package:url_shortener/core/providers/features/main/home/urls_list_provider.dart';
 import 'package:url_shortener/features/main/home/logic/url_shorten_request.dart';
+import 'package:http/http.dart' as http;
 
 /// [shortenUrlFromTextField] METHOD
 /// Gets stored url and requests URL shortening to service on domain layer
@@ -10,12 +11,13 @@ import 'package:url_shortener/features/main/home/logic/url_shorten_request.dart'
 /// 1. [urLsListProvider] --> Provider required edit URLs List
 /// 2. [urlFormProvider] --> Provider required to get data from form.
 /// 3. [textEditingController] --> Controller required to clear text field.
-Future<List<URL>> shortenUrlFromTextField(URLsListProvider urLsListProvider, URLFormProvider urlFormProvider, TextEditingController textEditingController) async {
+/// 4. [httpClient] --> Http Client required for API Request
+Future<List<URL>> shortenUrlFromTextField(URLsListProvider urLsListProvider, URLFormProvider urlFormProvider, TextEditingController textEditingController, http.Client httpClient) async {
   // Show Loading Indicator
   urlFormProvider.changeLoadingValue();
 
   // 1. URL shorten request
-  Map apiResult = await urlShortenRequest(urlFormProvider.url);
+  Map apiResult = await urlShortenRequest(httpClient, urlFormProvider.url);
 
   // 2. Clear url stored on URL Form Provider
   urlFormProvider.clearUrlInput();

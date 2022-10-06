@@ -8,6 +8,7 @@ import 'package:url_shortener/core/constants/strings.dart';
 import 'package:url_shortener/core/providers/features/main/home/url_form_provider.dart';
 import 'package:url_shortener/core/providers/features/main/home/urls_list_provider.dart';
 import 'package:url_shortener/features/main/home/logic/shorten_url_from_text_field.dart';
+import 'package:http/http.dart' as http;
 
 class URLShortenerToolSection extends StatefulWidget {
   const URLShortenerToolSection({Key? key}) : super(key: key);
@@ -105,6 +106,7 @@ class _URLShortenerToolSectionState extends State<URLShortenerToolSection> {
                             urlsListProvider!,
                             urlFormProvider!,
                             textEditingController,
+                            http.Client(),
                           );
                         },
                       ),
